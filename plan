@@ -1,0 +1,29 @@
+[Project 1][Linear Regression]
+Week - 01
+ > Building a simple restful Api.
+ > Building a simple Linear regression.
+
+Week - 02
+ > Connecting Linear regression result with web service. 
+ > Build minimalstic UI to complete an eco-system.
+
+[Project 2][Recommendation Engine]
+Reference - https://github.com/jadianes/spark-movie-lens
+Week - 03
+ > Data preparation for recommendation system.
+ > Building a crude recommendation system.
+ > Building Api for listing movies 
+ > Ui for listing movies
+ > Api for listing user.
+ > Ui for user and movie association.
+
+Week - 04
+ > Continue building recommendation engine.
+ > Ui development for listing recommended movies.
+ > Api for movie recommendation.
+
+
+Note: Spark comes with "Spark-jobserver" package, which provides Apis on top of Spark, but we 
+won't use them as of now.
+
+
