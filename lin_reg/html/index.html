@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title> Flask App</title>
+</head>
+<style type="text/css">
+	.sound-predict-card {
+		margin-left: 300px;
+		margin-right: 300px;
+		margin-top:100px;
+		padding: 20px;
+		border-radius: 15px;
+		background: cornflowerblue;
+		padding: 20px;
+	}
+</style>
+ <link rel="stylesheet" href="/css/bootstrap.css">
+<script src="/js/jquery-3.3.1.js"></script>
+<script src="/js/bootstrap.js"></script>
+<body class="container">
+	<div class="sound-predict-card">
+		<div class="row"> 
+			<h3> Predict sound...</h3>
+		</div>
+		<div>
+		    <label for="freq">Frequency:</label>
+		    <input type="number" class="form-control" id="freq" placeholder="Enter Frequency" name="freq">
+		</div>
+		<div>
+		    <label for="AoA">Angle of attack:</label>
+		    <input type="number" class="form-control" id="AoA" placeholder="Enter angle of attack" name="AoA">
+		</div>
+		<div>
+		    <label for="chord">Chord:</label>
+		    <input type="number" class="form-control" id="chord" placeholder="Enter chord" name="chord">
+		</div>
+		<div>
+		    <label for="v_inf">V inf:</label>
+		    <input type="number" class="form-control" id="v_inf" placeholder="Enter v inf" name="v_inf">
+		</div>
+		<div>
+		    <label for="disp_thick">Display thick:</label>
+		    <input type="number" class="form-control" id="disp_thick" placeholder="Enter dis thickness" name="disp_thick">
+		</div>
+		<button class="btn btn-block btn-success">Submit</button>
+		<div>Need to connect with /predict/sound api</div>
+	</div>
+</body>
+
+<script>
+$( document ).ready(function() {
+    console.log( "document loaded" );
+});
+
+$( window ).on( "load", function() {
+    console.log( "window loaded" );
+});
+</script>
+
+</html>

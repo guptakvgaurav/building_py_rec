@@ -1,15 +1,27 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, send_from_directory
 from ml_algo.model import Model;
 from ml_algo.model import AirFoil;
-#from pyspark.sql.types import *;
+from pyspark.sql.types import *;
 
-#import pyspark;
-#from pyspark import SparkConf, SparkContext, SQLContext
+import pyspark;
+from pyspark import SparkConf, SparkContext, SQLContext
 
 print('== [SERVER] -- Booting...');
 linReg = Model()
 
 app = Flask(__name__)
+
+@app.route('/')
+def send_index():
+	return send_from_directory('html', 'index.html')
+
+@app.route('/js/<path:path>')
+def send_js(path):
+    return send_from_directory('js', path)
+
+@app.route('/css/<path:path>')
+def send_css(path):
+    return send_from_directory('css', path)
 
 @app.route("/predict/sound")
 def top10Recommendation():
@@ -23,9 +35,10 @@ def top10Recommendation():
 @app.route('/test')
 def test():
 	# create spark Session
-	conf = SparkConf().setAppName("test").setMaster("local")
-	sc = SparkContext(conf=conf)
-	sqlContext = SQLContext(sc)
+	#conf = SparkConf().setAppName("test").setMaster("local")
+	#sc = SparkContext(conf=conf)
+	#sqlContext = SQLContext(sc)
+	session = linReg.getSession()
 
 	# Approach#1
 	tup = [(800,0,0.3048,71.3,0.0026634)]
@@ -45,11 +58,11 @@ def test():
 	#print(' ### session -->', session.conf);
 
 	# Approach 1
-	df = sqlContext.createDataFrame(tup, schema)
+	df = session.createDataFrame(tup, schema)
 	# Approach 2
 	#df = session.createDataFrame(tup, schema)
-	print(' ### data frame -->', df.toJSON())
-	return df.toJSON()
+	print(' ### data frame -->', df.head())
+	return "hgjhghjgjgj"
 
 if __name__ == "__main__":
 	print('== [Server] Starting server...');

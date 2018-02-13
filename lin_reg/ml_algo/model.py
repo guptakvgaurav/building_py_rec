@@ -44,13 +44,13 @@ class Model:
 		return ;
 
 	def _getSchema(self):
-		schema = StructType({
+		schema = StructType([
 			StructField("Freq_Hz", IntegerType(), False),
 			StructField("AoA_Deg", IntegerType(), False),
 			StructField("Chord_m", DoubleType(), False),
 			StructField("V_inf_mps", DoubleType(), False),
 			StructField("displ_thick_m", DoubleType(), False),
-		});
+		]);
 		return schema
 
 	def _prepare_df(self):
@@ -59,10 +59,8 @@ class Model:
 
 	def assemble(self, tup):
 		schema = self._getSchema();
-		df = self.spark.createDataFrame(tup, schema)
-		#print('== [Model] Created df looks like', df.head())
-		assembled_vector = self.airfoil_assembler.transform(df);
-		return assembled_vector.select("features");
+		inputVector = self.spark.createDataFrame(tup, schema)
+		return self._standardize_input(inputVector);
 
 	def _standardize_input(self, inputVector):
 
@@ -80,12 +78,11 @@ class Model:
 		return sample, self._standardize_input(sample);
 
 	def predict(self, airfoil):
-		#assembled_vector = self.assemble(tup=airfoil)
+		normalized_input_vector = self.assemble(tup=airfoil)
 		#print('== [Model] Assembled vec looks like -', assembled_vector.head())
-		sample, normalized_sample = self.getSample();
-		print('=== Sample looks like - ', sample.show());
-		print('=== Normalized sample looks like - ', normalized_sample.show());
-		return self.model.transform(normalized_sample)
+		#sample, normalized_sample = self.getSample();
+		print('=== Normalized input looks like - ', normalized_input_vector.show());
+		return self.model.transform(normalized_input_vector)
 
 
 class AirFoil:
